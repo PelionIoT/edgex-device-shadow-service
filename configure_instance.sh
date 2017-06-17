@@ -21,17 +21,16 @@ setup_shadow_service()
 setup_configurator()
 {
    cd /home/arm
-   ln -s shadow-service mds
    /bin/rm -rf configurator 2>&1 1> /dev/null
    unzip -q ./configurator-1.0.zip
    /bin/rm -f ./configurator-1.0.zip
    chown -R arm.arm configurator
    chmod -R 700 configurator
    cd configurator/conf
-   if [ -f gateway.properties ]; then
-       rm gateway.properties 2>&1 1> /dev/null
+   if [ -f shadow-service.properties ]; then
+       rm shadow-service.properties 2>&1 1> /dev/null
    fi
-   ln -s ../../shadow-service/conf/shadow-service.properties ./gateway.properties
+   ln -s ../../shadow-service/conf/shadow-service.properties ./shadow-service.properties
    cd ../..
 }
 

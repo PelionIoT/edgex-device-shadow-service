@@ -6,7 +6,7 @@ EXPOSE 1880/tcp
 EXPOSE 28175/tcp
 EXPOSE 8234/tcp
 RUN apt-get update
-RUN apt-get -y install default-jre vim sudo locales openssh-server supervisor dnsutils unzip zip mosquitto nodejs-legacy npm libleveldb1v5
+RUN apt-get -y install default-jre vim sudo locales openssh-server supervisor dnsutils unzip zip mosquitto
 RUN apt-get -y dist-upgrade
 RUN useradd arm -m -s /bin/bash 
 RUN mkdir -p /home/arm
@@ -15,6 +15,7 @@ COPY ssh-keys.tar /home/arm/
 COPY mosquitto.tar /home/arm/
 COPY configurator-1.0.zip /home/arm/
 COPY shadow-service.zip /home/arm/
+COPY restart.sh /home/arm/
 RUN chmod 755 /home/arm/ssh-keys.tar
 RUN chmod 755 /home/arm/mosquitto.tar
 RUN chmod 755 /home/arm/shadow-service.zip

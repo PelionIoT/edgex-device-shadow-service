@@ -8,7 +8,7 @@ update_hosts()
 run_shadow_service()
 {
    cd /home/arm
-   su -l arm -s /bin/bash -c "/home/arm/shadow-service/start.sh &"
+   su -l arm -s /bin/bash -c "/home/arm/restart.sh &"
 }
 
 run_configurator()

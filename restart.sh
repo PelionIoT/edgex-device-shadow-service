@@ -1,5 +1,6 @@
 #!/bin/sh
 
-cd mds
-./restart.sh
+cd shadow-service
+./killShadowService.sh
+./runShadowService.sh
 cd ${HOME}

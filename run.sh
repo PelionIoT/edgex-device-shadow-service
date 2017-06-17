@@ -5,8 +5,8 @@ cd mds
 cd ${HOME}
 cd configurator
 cd conf
-rm gateway.properties
-ln -s ../../mds/container-bridge/conf/gateway.properties .
+rm shadow-service.properties
+ln -s ${HOME}/shadow-service/conf/shadow-service.properties .
 cd ..
 ./runConfigurator.sh 2>&1 1>configurator.log &
 cd ${HOME}
