@@ -11,10 +11,10 @@ run_shadow_service()
    su -l arm -s /bin/bash -c "/home/arm/restart.sh &"
 }
 
-run_configurator()
+run_properties_editor()
 {
-  cd /home/arm/configurator
-  su -l arm -s /bin/bash -c "/home/arm/configurator/runConfigurator.sh 2>&1 1> /tmp/configurator.log &"
+  cd /home/arm/properties-editor
+  su -l arm -s /bin/bash -c "/home/arm/properties-editor/runPropertiesEditor.sh 2>&1 1> /tmp/properties-editor.log &"
 }
 
 run_supervisord()
@@ -32,19 +32,12 @@ set_perms() {
   chown -R arm.arm .
 }
 
-run_nodered() {
-  cd /home/arm
-  su -l arm -s /bin/bash -c "node-red flows_81f2e72d62ee.json 2>&1 1>/tmp/node-red.log &"
-  # su -l arm -s /bin/bash -c "node-red 2>&1 1>/tmp/node-red.log &"
-}
-
 main() 
 {
    set_perms $*
    run_mosquitto
-   run_configurator
+   run_properties_editor
    run_shadow_service
-   # run_nodered
    run_supervisord
 }
 

@@ -18,15 +18,15 @@ setup_shadow_service()
     chmod -R 700 shadow-service *.sh
 }
 
-setup_configurator()
+setup_properties_editor()
 {
    cd /home/arm
-   /bin/rm -rf configurator 2>&1 1> /dev/null
-   unzip -q ./configurator-1.0.zip
-   /bin/rm -f ./configurator-1.0.zip
-   chown -R arm.arm configurator
-   chmod -R 700 configurator
-   cd configurator/conf
+   /bin/rm -rf properties-editor 2>&1 1> /dev/null
+   unzip -q ./properties-editor-1.0.zip
+   /bin/rm -f ./properties-editor-1.0.zip
+   chown -R arm.arm properties-editor
+   chmod -R 700 properties-editor
+   cd properties-editor/conf
    if [ -f shadow-service.properties ]; then
        rm shadow-service.properties 2>&1 1> /dev/null
    fi
@@ -57,13 +57,6 @@ setup_sudoers()
     echo "%arm ALL=NOPASSWD: ALL" >> /etc/sudoers
 }
 
-setup_nodered() {
-   echo "Setting up Node-RED..."
-   cd /home/arm
-   # sudo ln -s /usr/bin/nodejs /usr/bin/node
-   sudo npm install -g --unsafe-perm node-red
-}
-
 setup_mosquitto() {
     echo "Setting up mosquitto MQTT Broker..."
     cd /etc
@@ -90,10 +83,9 @@ main()
     setup_ssh
     setup_java
     setup_shadow_service
-    setup_configurator
+    setup_properties_editor
     setup_mosquitto
     setup_hosts
-    # setup_nodered
     cleanup
 }
 

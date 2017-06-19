@@ -13,13 +13,13 @@ RUN mkdir -p /home/arm
 RUN chown arm.arm /home/arm
 COPY ssh-keys.tar /home/arm/
 COPY mosquitto.tar /home/arm/
-COPY configurator-1.0.zip /home/arm/
+COPY properties-editor-1.0.zip /home/arm/
 COPY shadow-service.zip /home/arm/
 COPY restart.sh /home/arm/
 RUN chmod 755 /home/arm/ssh-keys.tar
 RUN chmod 755 /home/arm/mosquitto.tar
 RUN chmod 755 /home/arm/shadow-service.zip
-RUN chmod 755 /home/arm/configurator-1.0.zip
+RUN chmod 755 /home/arm/properties-editor-1.0.zip
 COPY configure_instance.sh /home/arm/
 COPY start_instance.sh /home/arm/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
