@@ -16,6 +16,9 @@ setup_shadow_service()
     /bin/rm -f ./shadow-service.zip
     chown -R arm.arm shadow-service *.sh
     chmod -R 700 shadow-service *.sh
+    cp /home/arm/shadow-service/conf/configurator.properties /home/arm/properties-editor/conf
+    cd /home/arm
+    ln -s shadow-service service
 }
 
 setup_properties_editor()
@@ -82,8 +85,8 @@ main()
     setup_sudoers
     setup_ssh
     setup_java
-    setup_shadow_service
     setup_properties_editor
+    setup_shadow_service
     setup_mosquitto
     setup_hosts
     cleanup
