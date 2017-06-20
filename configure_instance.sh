@@ -25,7 +25,6 @@ setup_properties_editor()
    chown -R arm.arm properties-editor
    chmod -R 700 properties-editor
    cd properties-editor/conf
-   rm service.properties 2>&1 1> /dev/null
    ln -s ../../shadow-service/conf/service.properties ./service.properties
    cd ../..
 }
