@@ -28,6 +28,8 @@ fi
 
 echo "Building container image..."
 
+sleep 5
+
 if [ -f Dockerfile ]; then
     docker build -t "mbed/edgex-device-shadow-service" .
 else
