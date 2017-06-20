@@ -30,10 +30,8 @@ setup_properties_editor()
    chown -R arm.arm properties-editor
    chmod -R 700 properties-editor
    cd properties-editor/conf
-   if [ -f shadow-service.properties ]; then
-       rm shadow-service.properties 2>&1 1> /dev/null
-   fi
-   ln -s ../../shadow-service/conf/shadow-service.properties ./shadow-service.properties
+   rm service.properties 2>&1 1> /dev/null
+   ln -s ../../shadow-service/conf/service.properties ./service.properties
    cd ../..
 }
 
