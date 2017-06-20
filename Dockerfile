@@ -15,15 +15,16 @@ COPY mosquitto.tar /home/arm/
 COPY properties-editor-1.0.zip /home/arm/
 COPY shadow-service.zip /home/arm/
 COPY restart.sh /home/arm/
-RUN chmod 755 /home/arm/ssh-keys.tar
-RUN chmod 755 /home/arm/mosquitto.tar
-RUN chmod 755 /home/arm/shadow-service.zip
-RUN chmod 755 /home/arm/properties-editor-1.0.zip
 COPY configure_instance.sh /home/arm/
 COPY start_instance.sh /home/arm/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN chmod 700 /home/arm/ssh-keys.tar
+RUN chmod 700 /home/arm/mosquitto.tar
+RUN chmod 700 /home/arm/shadow-service.zip
+RUN chmod 700 /home/arm/properties-editor-1.0.zip
 RUN chmod 700 /home/arm/configure_instance.sh
 RUN chmod 700 /home/arm/start_instance.sh
+RUN chmod 700 /home/arm/restart.sh
 RUN /home/arm/configure_instance.sh
 
 ENTRYPOINT [ "/home/arm/start_instance.sh" ]

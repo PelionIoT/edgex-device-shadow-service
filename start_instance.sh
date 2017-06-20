@@ -1,8 +1,8 @@
 #!/bin/bash
 
-update_hosts()
+run_supervisord()
 {
-    sudo /home/arm/update_hosts.sh
+   /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 2>&1 1>/tmp/supervisord.log
 }
 
 run_shadow_service()
@@ -15,11 +15,6 @@ run_properties_editor()
 {
   cd /home/arm/properties-editor
   su -l arm -s /bin/bash -c "/home/arm/properties-editor/runPropertiesEditor.sh 2>&1 1> /tmp/properties-editor.log &"
-}
-
-run_supervisord()
-{
-   /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 2>&1 1>/tmp/supervisord.log
 }
 
 run_mosquitto() {
