@@ -4,11 +4,6 @@ setup_locale() {
    locale-gen en_US en_US.UTF-8
 }
 
-setup_hosts() {
-    echo "151.101.36.162 registry.npmjs.com" >> /etc/hosts
-    echo "151.101.36.162 registry.npmjs.org" >> /etc/hosts
-}
-
 setup_shadow_service()
 {
     cd /home/arm
@@ -83,10 +78,9 @@ main()
     setup_sudoers
     setup_ssh
     setup_java
+    setup_mosquitto
     setup_properties_editor
     setup_shadow_service
-    setup_mosquitto
-    setup_hosts
     cleanup
 }
 
