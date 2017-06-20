@@ -1,6 +1,6 @@
 #!/bin/sh
 
 cd shadow-service
-./killShadowService.sh
-./runShadowService.sh
+./killService.sh
+./runService.sh
 cd ${HOME}
