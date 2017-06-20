@@ -2,7 +2,6 @@ FROM ubuntu:16.04
 MAINTAINER ARM <doug.anson@arm.com>
 EXPOSE 22/tcp
 EXPOSE 1883/tcp
-EXPOSE 1880/tcp
 EXPOSE 28175/tcp
 EXPOSE 8234/tcp
 RUN apt-get update
