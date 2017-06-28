@@ -11,7 +11,7 @@ setup_shadow_service()
     /bin/rm -f ./shadow-service.zip
     chown -R arm.arm shadow-service *.sh
     chmod -R 700 shadow-service *.sh
-    cp /home/arm/shadow-service/conf/configurator.properties /home/arm/properties-editor/conf
+    cp /home/arm/shadow-service/conf/properties-editor.properties /home/arm/properties-editor/conf
     cd /home/arm
     ln -s shadow-service service
 }
@@ -20,8 +20,8 @@ setup_properties_editor()
 {
    cd /home/arm
    /bin/rm -rf properties-editor 2>&1 1> /dev/null
-   unzip -q ./properties-editor-1.0.zip
-   /bin/rm -f ./properties-editor-1.0.zip
+   unzip -q ./properties-editor.zip
+   /bin/rm -f ./properties-editor.zip
    chown -R arm.arm properties-editor
    chmod -R 700 properties-editor
    cd properties-editor/conf
