@@ -2,5 +2,5 @@
 
 cd shadow-service
 ./killService.sh
-./runService.sh
+./runService.sh &
 cd ${HOME}
