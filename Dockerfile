@@ -1,12 +1,12 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER ARM <doug.anson@arm.com>
 EXPOSE 22/tcp
 EXPOSE 1883/tcp
-EXPOSE 28175/tcp
 EXPOSE 8234/tcp
+EXPOSE 28175/tcp
+EXPOSE 17362/tcp
 RUN apt-get update
-RUN apt-get -y install default-jre vim sudo locales openssh-server supervisor dnsutils unzip zip mosquitto
-RUN apt-get -y dist-upgrade
+RUN apt-get -y install openjdk-8-jre vim sudo locales openssh-server supervisor dnsutils unzip zip mosquitto
 RUN useradd arm -m -s /bin/bash 
 RUN mkdir -p /home/arm
 RUN chown arm.arm /home/arm
