@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# Mbed Edge Core Runtime Release
+#
+MBED_EDGE_RELEASE=0.8.0
+
 setup_locale() {
    locale-gen en_US en_US.UTF-8
 }
@@ -68,6 +73,26 @@ setup_java() {
 cleanup()
 {
    /bin/rm -f /home/arm/configure_instance.sh 2>&1 1>/dev/null
+   /bin/rm -f /home/arm/scripts.tar 2>&1 1>/dev/null
+}
+
+setup_mbed_edge_core() {
+    echo "Setting up scripts directory..."
+    tar xf scripts.tar
+    chown -R arm.arm scripts
+    chmod -R 700 scripts
+    echo "Cloning mbed edge repo..."
+    cd /home/arm
+    git clone --branch ${MBED_EDGE_RELEASE} https://github.com/ARMmbed/mbed-edge
+    cd mbed-edge
+    git submodule init
+    git submodule update
+    mkdir build
+    cd /home/arm
+    cd /home/arm/service/target
+    ln -s /home/arm/scripts .
+    cd /home/arm
+    chown -R arm.arm mbed-edge
 }
 
 main() 
@@ -80,6 +105,7 @@ main()
     setup_mosquitto
     setup_properties_editor
     setup_shadow_service
+    setup_mbed_edge_core
     cleanup
 }
 

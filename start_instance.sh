@@ -22,6 +22,20 @@ run_mosquitto() {
   mosquitto -d -c /etc/mosquitto/mosquitto.conf &
 }
 
+run_mbed_edge_core() {
+   if [ -d /home/arm/mbed-edge/build/bin ]; then 
+       cd /home/arm/mbed-edge/build/bin
+       if [ -x ./edge-core ]; then 
+           echo "Starting mbed edge core..."
+           ./edge-core &
+       else
+   	   echo "Mbed edge core not executable. Ignoring run request."
+       fi
+   else
+       echo "Mbed edge core not built. Ignoring run request."
+   fi
+}
+
 set_perms() {
   cd /home/arm
   chown -R arm.arm .
@@ -31,6 +45,7 @@ main()
 {
    set_perms $*
    run_mosquitto
+   run_mbed_edge_core
    run_properties_editor
    run_shadow_service
    run_supervisord

@@ -1,1 +1,1 @@
-EdgeX mbed Device Shadow Service
+arm PELION EdgeX Shadow Service 
