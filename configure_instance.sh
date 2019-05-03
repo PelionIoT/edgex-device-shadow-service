@@ -3,7 +3,7 @@
 #
 # Mbed Edge Core Runtime Release
 #
-MBED_EDGE_RELEASE=0.8.0
+MBED_EDGE_RELEASE=0.9.0
 
 setup_locale() {
    locale-gen en_US en_US.UTF-8

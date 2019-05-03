@@ -7,7 +7,7 @@ EXPOSE 28175/tcp
 EXPOSE 17362/tcp
 RUN apt-get update
 RUN apt-get -y install openjdk-8-jre vim sudo locales openssh-server supervisor dnsutils unzip zip mosquitto
-RUN apt-get -y install git libmosquitto-dev mosquitto-clients libc6-dev build-essential cmake git doxygen graphviz jq curl
+RUN apt-get -y install git libmosquitto-dev mosquitto-clients libc6-dev build-essential cmake git doxygen graphviz jq curl socat
 RUN useradd arm -m -s /bin/bash 
 RUN mkdir -p /home/arm
 RUN chown arm.arm /home/arm
