@@ -10,6 +10,14 @@ SOCAT_PORT=4455
 #
 SOCAT_SOCK=/tmp/edge.sock
 
+#
+# socat PID
+#
+PID_SOCAT="`ps -ef | grep socat | grep -v grep | awk '{print $2}'`"
+
+#
+# Pelion API Key
+#
 API_KEY="`grep api_key= /home/arm/service/conf/service.properties | grep -v Pelion_API | cut -d'=' -f 2`"
 if [ "${API_KEY}X" = "X" ]; then
     echo "Unable to start mbed edge core - Pelion API Key has not been set yet."
@@ -24,9 +32,18 @@ if [ -x /home/arm/mbed-edge/build/bin/edge-core ]; then
 	rm -f /home/arm/edge.log > /dev/null 2>&1
         ./edge-core > /home/arm/edge.log 2>&1 &
         sleep 5
+	if [ "${PID_SOCAT}X" != "X" ]; then
+            kill ${PID_SOCAT}
+            sleep 5
+        fi
         socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
     else 
         echo "Mbed edge core already running (OK)."
+ 	if [ "${PID_SOCAT}X" != "X" ]; then
+	    kill ${PID_SOCAT}
+	    sleep 5
+	fi
+        socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
         exit 0
     fi
 else
@@ -39,9 +56,17 @@ else
 	rm -f /home/arm/edge.log > /dev/null 2>&1
         ./edge-core > /home/arm/edge.log 2>&1 &
 	sleep 5
+	if [ "${PID_SOCAT}X" != "X" ]; then
+            kill ${PID_SOCAT}
+            sleep 5
+        fi
         socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
     else
        echo "ERROR: Unable to build and launch mbed edge core."
+       if [ "${PID_SOCAT}X" != "X" ]; then
+            kill ${PID_SOCAT}
+            sleep 5
+       fi
        exit 1
     fi
 fi
