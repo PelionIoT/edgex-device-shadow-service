@@ -3,12 +3,18 @@
 #
 # must match port number used in WS URI within PelionEdgeCoreClientAPI (default is 4455)
 #
-SOCAT_PORT=4455
+SOCAT_PORT_PT=4455
+SOCAT_PORT_MGMT=4456
 
 #
 # must match socket file used by edge-core (default is /tmp/edge.sock) and in WS URI within PelionEdgeCoreClientAPI
 #
 SOCAT_SOCK=/tmp/edge.sock
+
+#
+# socat options
+SOCAT_OPTIONS_PT="TCP-LISTEN:${SOCAT_PORT_PT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK}"
+SOCAT_OPTIONS_MGMT="TCP-LISTEN:${SOCAT_PORT_MGMT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK}"
 
 #
 # socat PID
@@ -23,7 +29,7 @@ if [ "${API_KEY}X" = "X" ]; then
     echo "Unable to start mbed edge core - Pelion API Key has not been set yet."
     exit 0
 fi
-    
+
 if [ -x /home/arm/mbed-edge/build/bin/edge-core ]; then
     RUNNING="`./mbed_edge_running.sh`"
     if [ "${RUNNING}X" = "NOX" ]; then
@@ -31,19 +37,23 @@ if [ -x /home/arm/mbed-edge/build/bin/edge-core ]; then
         cd /home/arm/mbed-edge/build/bin
 	rm -f /home/arm/edge.log > /dev/null 2>&1
         ./edge-core > /home/arm/edge.log 2>&1 &
-        sleep 5
+	echo "Waiting while mbed edge core starts up...."
+        sleep 15 
+	echo "Starting socat links..."
 	if [ "${PID_SOCAT}X" != "X" ]; then
-            kill ${PID_SOCAT}
+            kill ${PID_SOCAT} > /dev/null 2>&1
             sleep 5
         fi
-        socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
+	socat ${SOCAT_OPTIONS_PT} > /dev/null 2>&1 &
+	socat ${SOCAT_OPTIONS_MGMT} > /dev/null 2>&1 &
     else 
         echo "Mbed edge core already running (OK)."
  	if [ "${PID_SOCAT}X" != "X" ]; then
-	    kill ${PID_SOCAT}
+            kill ${PID_SOCAT} > /dev/null 2>&1
 	    sleep 5
 	fi
-        socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
+	socat ${SOCAT_OPTIONS_PT} > /dev/null 2>&1 &
+	socat ${SOCAT_OPTIONS_MGMT} > /dev/null 2>&1 &
         exit 0
     fi
 else
@@ -57,14 +67,15 @@ else
         ./edge-core > /home/arm/edge.log 2>&1 &
 	sleep 5
 	if [ "${PID_SOCAT}X" != "X" ]; then
-            kill ${PID_SOCAT}
+            kill ${PID_SOCAT} > /dev/null 2>&1
             sleep 5
         fi
-        socat TCP-LISTEN:${SOCAT_PORT},reuseaddr UNIX-CLIENT:${SOCAT_SOCK} &
+	socat ${SOCAT_OPTIONS_PT} > /dev/null 2>&1 &
+	socat ${SOCAT_OPTIONS_MGMT} > /dev/null 2>&1 &
     else
        echo "ERROR: Unable to build and launch mbed edge core."
        if [ "${PID_SOCAT}X" != "X" ]; then
-            kill ${PID_SOCAT}
+            kill ${PID_SOCAT} > /dev/null 2>&1
             sleep 5
        fi
        exit 1
