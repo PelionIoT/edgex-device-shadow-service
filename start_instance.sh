@@ -41,9 +41,17 @@ set_perms() {
   chown -R arm.arm .
 }
 
+set_edgex_ip_address() {
+  echo "Setting EdgeX IP Address to: ${DOCKER_HOST}..."
+  cd /home/arm/service/conf
+  mv service.properties service.properties.EdgeX
+  sed "s/EdgeX_IP_Address_Goes_Here/${DOCKER_HOST}/g" < service.properties.EdgeX > service.properties
+}
+
 main() 
 {
    set_perms $*
+   set_edgex_ip_address $*
    run_mosquitto
    run_mbed_edge_core
    run_properties_editor
