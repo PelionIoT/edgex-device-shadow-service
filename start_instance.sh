@@ -56,6 +56,7 @@ set_edgex_ip_address() {
       cd /home/arm/service/conf
       mv service.properties service.properties.EdgeX
       sed "s/EdgeX_IP_Address_Goes_Here/${DOCKER_HOST}/g" < service.properties.EdgeX > service.properties
+      chown arm.arm service.properties
       chmod 600 service.properties
   else 
       echo "Not setting EdgeX IP Address (not set)...OK..."
