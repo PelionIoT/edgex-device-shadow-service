@@ -41,6 +41,15 @@ set_perms() {
   chown -R arm.arm .
 }
 
+validate_edgex_ip_address() {
+  if [ "${DOCKER_HOST}X" != "X" ]; then
+     echo "EdgeX IP Address already set to: ${DOCKER_HOST}... OK"
+  else
+     export DOCKER_HOST="`ip route show default | awk '/default/ {print $3}'`"
+     echo "Setting EdgeX IP Address to: ${DOCKER_HOST}..."
+  fi
+}
+
 set_edgex_ip_address() {
   if [ "${DOCKER_HOST}X" != "X" ]; then
       echo "Setting EdgeX IP Address to: ${DOCKER_HOST}..."
@@ -56,6 +65,7 @@ set_edgex_ip_address() {
 main() 
 {
    set_perms $*
+   validate_edgex_ip_address $*
    set_edgex_ip_address $*
    run_mosquitto
    run_mbed_edge_core
