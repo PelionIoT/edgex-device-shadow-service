@@ -95,6 +95,11 @@ setup_mbed_edge_core() {
     chown -R arm.arm mbed-edge
 }
 
+patch_mbed_edge_core() {
+    cd /home/arm
+    mv rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc
+}
+
 main() 
 {
     setup_locale
@@ -106,6 +111,7 @@ main()
     setup_properties_editor
     setup_shadow_service
     setup_mbed_edge_core
+    patch_mbed_edge_core
     cleanup
 }
 

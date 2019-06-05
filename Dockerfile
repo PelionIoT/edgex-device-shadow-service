@@ -19,6 +19,7 @@ COPY restart.sh /home/arm/
 COPY configure_instance.sh /home/arm/
 COPY start_instance.sh /home/arm/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY rpc.c-0.9.0 /home/arm/
 RUN chmod 700 /home/arm/ssh-keys.tar
 RUN chmod 700 /home/arm/mosquitto.tar
 RUN chmod 700 /home/arm/shadow-service.zip
