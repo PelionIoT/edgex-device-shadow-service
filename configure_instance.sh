@@ -98,8 +98,8 @@ setup_mbed_edge_core() {
 patch_mbed_edge_core() {
     cd /home/arm
     echo "Patching mbed-edge ${MBED_EDGE_RELEASE}..."
-    echo mv /homne/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc.c
-    mv /homne/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc/rpc.c
+    echo mv /home/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc.c
+    mv /home/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc/rpc.c
 }
 
 main() 
