@@ -81,7 +81,7 @@ setup_mbed_edge_core() {
     tar xf scripts.tar
     chown -R arm.arm scripts
     chmod -R 700 scripts
-    echo "Cloning mbed edge repo..."
+    echo "Cloning mbed edge repo (v${{MBED_EDGE_RELEASE})..."
     cd /home/arm
     git clone --branch ${MBED_EDGE_RELEASE} https://github.com/ARMmbed/mbed-edge
     cd mbed-edge
@@ -97,7 +97,9 @@ setup_mbed_edge_core() {
 
 patch_mbed_edge_core() {
     cd /home/arm
-    mv rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc
+    echo "Patching mbed-edge (v${{MBED_EDGE_RELEASE})..."
+    echo mv /homne/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc
+    mv /homne/arm/rpc.c-${MBED_EDGE_RELEASE} mbed-edge/edge-rpc/rpc.c
 }
 
 main() 
