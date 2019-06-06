@@ -1,5 +1,7 @@
 arm PELION EdgeX Shadow Service 
 
+- 06/06/2019: Additional updates for resource write support (active. R/W resources only.)
+
 - 06/05/2019: Final updates for resource write support (active. R/W resources only.)
 
 - 06/05/2019: More updates for resource write support (not enabled yet by default...)
