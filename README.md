@@ -1,5 +1,7 @@
 arm PELION EdgeX Shadow Service 
 
+- 10/14/2020: Updated dependencies in bridge
+
 - 06/14/2019: Updates for auto MQTT Exporter configuration
 
 - 06/06/2019: Additional updates for resource write support (active. R/W resources only.)
